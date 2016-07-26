@@ -38,7 +38,6 @@ proc lookup { ch } {
 }
 
 
-# Lexical analyzer
 proc lex {} {
    global nextToken
    global lexeme
@@ -60,7 +59,6 @@ proc lex {} {
    puts "Next token is $nextToken"
 }
 
-
 # rule -> lhs = rhs ;
 proc rule {} {
    global nextToken
@@ -72,10 +70,12 @@ proc rule {} {
       if { $nextToken == "END_OF_RULE" } {
          puts "Exit rule"
       } else {
-         puts "Error: ; is expected in the end of rule"
+         puts "Error: ; is expected in the end of rule. Terminating program."
+         exit
       }
    } else {
-      puts "Error: = is expected after lhs in rule"
+      puts "Error: = is expected after lhs in rule. Terminating program."
+      exit
    }
 }
 
@@ -88,7 +88,8 @@ proc lhs {} {
       puts "Exit lhs"
       return
    } else {
-      puts "Error: identifier is expected in lhs"
+      puts "Error: identifier is expected in lhs. Terminating program."
+      exit
    }
 }
 
