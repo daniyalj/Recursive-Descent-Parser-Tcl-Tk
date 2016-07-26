@@ -1,6 +1,8 @@
-#A lexical analyzer system
+# A lexical analyzer system for EBNF grammar. 
+# It parses rules correctly if all tokens in the input are delimited by whitespace
+# e.g. A = B [ R , C] ;
 
-
+#Determine if a token is an operator and what its type is
 proc lookup { ch } {
    if { $ch == "(" } {
         return "LEFT_PAREN"
@@ -36,29 +38,26 @@ proc lookup { ch } {
 }
 
 
-puts "Enter file name e.g. file.txt"
-gets stdin filename
+#Main function
+puts "Enter an EBNF rule to parse:"
+#read one line of input
+gets stdin userinput
+#split input into tokens using whitespace as a delimeter
+set tokens [split $userinput " "]
+set count 0
 
-set fp [open $filename r]
+while { $count < [llength $tokens] } {
+   set lexeme [lindex $tokens $count]
+   puts -nonewline "Next lexeme is $lexeme . "
+   incr count
 
-   set count 0
-   set file_data [read $fp]
-   set tokens [split $file_data " "]
-
-   while { $count < [llength $tokens] } {
-      set lexeme [lindex $tokens $count]
-      incr count
-
-      if { [regexp {^[a_zA-Z]([a_zA-Z]|[0-9]|_)*} $lexeme] } {
-         set nextToken "IDENTIFIER" 
-      } elseif { [regexp {^\"([a-zA-Z]|[0-9]|_)+\"$} $lexeme] || [regexp {^\'([a-zA-Z]|[0-9]|_)+\'$} $lexeme] } {
-         set nextToken "TERMINAL"
-      } else {
-         set nextToken [lookup $lexeme]
-      }
-
-      puts -nonewline "Next token is $nextToken. "
-      puts "Next lexeme is $lexeme."
+   if { [regexp -nocase {^[a-z]([a-z]|[0-9]|_)*$} $lexeme] } {
+      set nextToken "IDENTIFIER" 
+   } elseif { [regexp -nocase {^\"([a-z]|[0-9])+\"$} $lexeme] || [regexp -nocase {^\'([a-z]|[0-9])+\'$} $lexeme] } {
+      set nextToken "TERMINAL"
+   } else {
+      set nextToken [lookup $lexeme]
    }
 
-close $fp
+   puts "Next token is $nextToken"
+}
