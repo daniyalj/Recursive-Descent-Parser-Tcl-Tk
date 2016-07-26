@@ -53,7 +53,7 @@ set fp [open $filename r]
       if { [regexp {^[a_zA-Z]([a_zA-Z]|[0-9]|_)*} $lexeme] } {
          set nextToken "IDENTIFIER" 
 
-      } elseif { [regexp {^\"([a-zA-Z]|[0-9])+\"$} $lexeme] || [regexp {^\'([a-zA-Z]|[0-9])+\'$} $lexeme] } {
+      } elseif { [regexp {^\"([a-zA-Z]|[0-9]|_)+\"$} $lexeme] || [regexp {^\'([a-zA-Z]|[0-9]|_)+\'$} $lexeme] } {
          set nextToken "TERMINAL"
 
       } else {
