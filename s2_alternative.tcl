@@ -47,21 +47,18 @@ set fp [open $filename r]
 
    while { $count < [llength $tokens] } {
       set lexeme [lindex $tokens $count]
-      puts -nonewline "Next lexeme is $lexeme . "
       incr count
 
       if { [regexp {^[a_zA-Z]([a_zA-Z]|[0-9]|_)*} $lexeme] } {
          set nextToken "IDENTIFIER" 
-
       } elseif { [regexp {^\"([a-zA-Z]|[0-9]|_)+\"$} $lexeme] || [regexp {^\'([a-zA-Z]|[0-9]|_)+\'$} $lexeme] } {
          set nextToken "TERMINAL"
-
       } else {
          set nextToken [lookup $lexeme]
-
       }
 
-      puts "Next token is $nextToken"
+      puts -nonewline "Next token is $nextToken. "
+      puts "Next lexeme is $lexeme."
    }
 
 close $fp
