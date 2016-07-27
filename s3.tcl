@@ -154,7 +154,7 @@ proc term {} {
 
 
 #  Main function
-proc runs2 { userinput } {
+proc runs3 { userinput } {
    #split input into tokens using whitespace as a delimeter
    set tokens [split $userinput " "]
    set count 0
