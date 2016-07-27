@@ -1,0 +1,38 @@
+set linew 100
+set olineh 100
+set clinew 20
+set boxw 50
+set offset 15
+set boxh 30
+set ovalw 50
+set ovalh 30
+set xtexto 10
+set ytexto 7
+
+set xsf 100
+set ysf 100
+
+canvas .myCanvas -background white -width 1000 -height 500
+pack .myCanvas
+
+# start line
+.myCanvas create line $xsf $ysf [expr {$linew + $x}] $ysf -fill blue
+
+#	text
+.myCanvas create text [expr {$x + $xtexto}] [expr {$y + $ytexto}] \
+-fill black -justify center -text $text -font {Helvetica -18 bold}
+
+# finish line
+.myCanvas create line $xsf $ysf [expr {$linew + $x}] $ysf -fill blue
+
+# vertical line
+.myCanvas create line $x $y $x [expr {$olineh + $y}] -fill black
+# for an arrow pointing right/down use -arrow first
+# for an arrow pointing left/down use -arrow last
+
+# nonterminal
+.myCanvas create rectangle $x $y [expr {$boxw + $x}] [expr {$boxh + $y}] -outline black
+
+# terminal
+.myCanvas create oval $x $y [expr {$ovalw + $x}] [expr {$ovalh + $y}] -outline black 
+
