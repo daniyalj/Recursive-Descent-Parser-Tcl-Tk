@@ -154,14 +154,15 @@ proc term {} {
 
 
 #  Main function
-proc runs3 { userinput } {
-   #split input into tokens using whitespace as a delimeter
-   set tokens [split $userinput " "]
-   set count 0
-   set nextToken ""
-   set lexeme ""
+puts "Enter an EBNF rule to parse:"
+#read one line of input
+gets stdin userinput
+#split input into tokens using whitespace as a delimeter
+set tokens [split $userinput " "]
+set count 0
+set nextToken ""
+set lexeme ""
 
-   while { $count < [llength $tokens] } {
-      rule
-   }
+while { $count < [llength $tokens] } {
+   rule
 }
