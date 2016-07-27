@@ -39,24 +39,25 @@ proc lookup { ch } {
 
 
 #Main function
-proc runs2 { userinput } {
-   #split input into tokens using whitespace as a delimeter
-   set tokens [split $userinput " "]
-   set count 0
-   
-   while { $count < [llength $tokens] } {
-      set lexeme [lindex $tokens $count]
-      puts -nonewline "Next lexeme is $lexeme . "
-      incr count
-   
-      if { [regexp -nocase {^[a-z]([a-z]|[0-9]|_)*$} $lexeme] } {
-         set nextToken "IDENTIFIER" 
-      } elseif { [regexp -nocase {^\"([a-z]|[0-9])+\"$} $lexeme] || [regexp -nocase {^\'([a-z]|[0-9])+\'$} $lexeme] } {
-         set nextToken "TERMINAL"
-      } else {
-         set nextToken [lookup $lexeme]
-      }
-   
-      puts "Next token is $nextToken"
+puts "Enter an EBNF rule to parse:"
+#read one line of input
+gets stdin userinput
+#split input into tokens using whitespace as a delimeter
+set tokens [split $userinput " "]
+set count 0
+
+while { $count < [llength $tokens] } {
+   set lexeme [lindex $tokens $count]
+   puts -nonewline "Next lexeme is $lexeme . "
+   incr count
+
+   if { [regexp -nocase {^[a-z]([a-z]|[0-9]|_)*$} $lexeme] } {
+      set nextToken "IDENTIFIER" 
+   } elseif { [regexp -nocase {^\"([a-z]|[0-9])+\"$} $lexeme] || [regexp -nocase {^\'([a-z]|[0-9])+\'$} $lexeme] } {
+      set nextToken "TERMINAL"
+   } else {
+      set nextToken [lookup $lexeme]
    }
+
+   puts "Next token is $nextToken"
 }
