@@ -1,3 +1,9 @@
+#
+#	David Iliaguiev, 210479830, davidili
+#	Daniyal Javed, 212654570, cse31034
+#	Alesya Orina, 212290987, cse23221
+#
+
 # A lexical analyzer with recursive descent parser system for EBNF grammar. 
 # It parses rules correctly if all tokens in the input are delimited by whitespace
 # e.g. A = B [ R , C] ;
