@@ -18,6 +18,9 @@ pack .myCanvas
 # start line
 .myCanvas create line $xsf $ysf [expr {$linew + $x}] $ysf -fill blue
 
+# connector line to be used before and after a rectangle or oval
+.myCanvas create line $x $y [expr {$clinew + $x}] $y -arrow front -fill black 
+
 #	text
 .myCanvas create text [expr {$x + $xtexto}] [expr {$y + $ytexto}] \
 -fill black -justify center -text $text -font {Helvetica -18 bold}
